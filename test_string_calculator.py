@@ -19,6 +19,8 @@ class TestStringCalculator(unittest.TestCase):
         self.assertEqual(3+9, self.calculator.add("3,9\\n"))
         self.assertEqual(3+9, self.calculator.add("\\n3,9\\n"))
         self.assertEqual(3+9+8, self.calculator.add("\\n3,9\\n8"))
+        self.assertEqual(3+9+8, self.calculator.add("//;\\n3;9;8"))
+        self.assertEqual(3+9+8, self.calculator.add("//l\\n3l9l8"))
     
     def test_error_are_handled_properly(self):
         """check validation errors are handled properly"""
@@ -26,6 +28,7 @@ class TestStringCalculator(unittest.TestCase):
         self.assertRaises(TypeError, self.calculator.add, "f,9.0")
         self.assertRaises(TypeError, self.calculator.add, "f,9.0\br")
         self.assertRaises(TypeError, self.calculator.add, "f\b9\\")
+        self.assertRaises(TypeError, self.calculator.add, "//l\\n3k9l8")
 
     def test_alert_messages(self):
         """test alert messages"""
@@ -35,3 +38,6 @@ class TestStringCalculator(unittest.TestCase):
         with self.assertRaises(ValueError) as msg:
             self.calculator.add("5,-6\\n-7")
             self.assertEqual(msg, "negative numbers not allowed -6,-7")
+        with self.assertRaises(ValueError) as msg:
+            self.calculator.add("//l\\n3l9l-9")
+            self.assertEqual(msg, "negative numbers not allowed -9")
