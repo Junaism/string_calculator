@@ -26,3 +26,12 @@ class TestStringCalculator(unittest.TestCase):
         self.assertRaises(TypeError, self.calculator.add, "f,9.0")
         self.assertRaises(TypeError, self.calculator.add, "f,9.0\br")
         self.assertRaises(TypeError, self.calculator.add, "f\b9\\")
+
+    def test_alert_messages(self):
+        """test alert messages"""
+        with self.assertRaises(ValueError) as msg:
+            self.calculator.add("5,-9")
+            self.assertEqual(msg, "negative numbers not allowed -6")
+        with self.assertRaises(ValueError) as msg:
+            self.calculator.add("5,-6\\n-7")
+            self.assertEqual(msg, "negative numbers not allowed -6,-7")
