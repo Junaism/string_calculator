@@ -8,10 +8,9 @@ Python program to calculate the sum of integers in the string input
    '''
    python3 string_calculator.py
    '''
-   which will prompt to enter the input string and will print 
+   which will prompt to enter the input string and will print the result
 
 * For executing the test case run the following command
   '''
   python3 -m unittest test_string_calculator.py
   '''
-  
