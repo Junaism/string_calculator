@@ -14,6 +14,7 @@ class TestStringCalculator(unittest.TestCase):
         self.assertEqual(-1, self.calculator.add(""))
         self.assertEqual(3, self.calculator.add("3,"))
         self.assertEqual(3, self.calculator.add(",3"))
+        self.assertEqual(1+2+4+6+7+9+56, self.calculator.add("1,2,4,6,7,9,56"))
     
     def test_error_are_handled_properly(self):
         """check validation errors are handled properly"""
