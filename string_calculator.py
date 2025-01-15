@@ -11,11 +11,14 @@ class StringCalculator:
         """
         list_of_integers = [0]
         if value:
-            if re.findall(r'[^0-9,]', value.replace("\\n", ",")): # check only contain integers with comma and \n seperated
+            if re.findall(r'[^0-9,-]', value.replace("\\n", ",")): # check only contain integers with comma and \n seperated
                raise TypeError("Invalid input!, confirm input only contains integers that are comma or \\n seperated")
             else:
                value = value.replace('\\n', ',')
                list_of_integers = value.split(",")
+               negative_numbers = [num for num in list_of_integers if num and int(num)<0]
+               if negative_numbers:
+                   raise ValueError("negative numbers not allowed {}".format(",".join(negative_numbers)))
         else:
             return -1
         return sum([int(number.strip()) for number in list_of_integers if number.isdigit()])
