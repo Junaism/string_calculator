@@ -1,3 +1,5 @@
+import re
+
 class StringCalculator:
     """String calculator class"""
 
@@ -9,10 +11,12 @@ class StringCalculator:
         """
         list_of_integers = [0]
         if value:
+           if re.findall('[^0-9,]', value): # check only contain integers with comma seperated
+               raise TypeError("Invalid input!, confirm input only contains integers that are comma seperated")
            list_of_integers = value.split(",")
         else:
             return -1
-        return sum([int(number) for number in list_of_integers])
+        return sum([int(number.strip()) for number in list_of_integers if number.isdigit()])
 
 
 if __name__ == "__main__":
